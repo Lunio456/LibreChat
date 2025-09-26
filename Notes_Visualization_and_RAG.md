@@ -2,7 +2,7 @@
 
 ## visualization_dashboard
 
-For the Visualization Dashboard, I created the Python script **historic_dummy_data.py** in the Uploads folder. Running this script from the terminal with:
+For the Visualization Dashboard, I created a Python script named **historic_dummy_data.py**, located in the Uploads folder, to generate dummy data. Running the script from the terminal using:
 ```bash
 python3 historic_dummy_data.py
 ```
@@ -10,8 +10,8 @@ will generate a CSV file named **historic_portfolio.csv**.
 
 By connecting to the MCP servers **filesystem** and **visualization_dashboard** via LibreChat, you can use the following prompt to create the dashboard and its 4 plots:
 
-**`read the csv file historic_portfolio.csv using filesystem 
-from historic_portfolio.csv create a dashboard using the visualization_dashboard mcp server.
+**`read the csv file historic_portfolio.csv using filesystem <br>
+from historic_portfolio.csv create a dashboard using the visualization_dashboard mcp server <br>
 save all 4 plots and the dashboard as .html-files under uploads/dashboard using filesystem`**
 
 This will generate the dashboard and four plots, which are saved again in the Uploads folder.
@@ -35,4 +35,3 @@ After that, you can analyze the output using an LLM prompt input by running:
 ```bash
 python3 ask.py
 ```
-kann der Output über eine LLM-Prompt eingabe analysiert werden.
