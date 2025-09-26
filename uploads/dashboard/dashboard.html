@@ -1,82 +1,56 @@
-import pandas as pd
-from io import StringIO
-from typing import Tuple, Dict
-from .dashboard_chart_generator import generate_all_charts
-import json
-
-DASHBOARD_TITLE = "Showcase Multi Agent Portfolio Analytics"
-COPYRIGHT_NOTICE = "&copy; 2025 Portfolio Dashboard"
-
-
-def build_dashboard(df: pd.DataFrame) -> Tuple[str, Dict[str, str]]:
-    chart_htmls = generate_all_charts(df)
-
-    try:
-        dashboard_html = _render_dashboard_html_iframes(
-            "performance.html",
-            "top_positions.html",
-            "drawdown.html",
-            "allocation.html",
-        )
-        return dashboard_html, chart_htmls
-    except Exception as e:
-        return _render_error_page(f"Fehler beim Generieren der Diagramme: {e}"), {}
-
-
-def _render_dashboard_html_iframes(perf_file: str, top_file: str, dd_file: str, alloc_file: str) -> str:
-    return f"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{DASHBOARD_TITLE}</title>
+    <title>Showcase Multi Agent Portfolio Analytics</title>
     <style>
-        body {{
+        body {
             font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
             padding-bottom: 60px;
-        }}
+        }
 
-        header {{
+        header {
             background-color: #003C4B;
             color: #fff;
             padding: 1px;
             text-align: center;
-        }}
+        }
 
-        .container {{
+        .container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             padding: 10px;
-        }}
+        }
 
-        .card {{
+        .card {
             background: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-        }}
+        }
 
-        .card-title {{
+        .card-title {
             background-color: #003c50;
             color: white;
             font-weight: bold;
             font-size: 14px;
             padding: 10px 16px;
-        }}
+        }
 
-        iframe {{
+        iframe {
             width: 100%;
             height: 37vh;
             border: none;
             display: block;
-        }}
+        }
 
-        footer {{
+        footer {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -86,44 +60,31 @@ def _render_dashboard_html_iframes(perf_file: str, top_file: str, dd_file: str, 
             line-height: 1.2;
             text-align: center;
             padding: 1px 0;
-        }}
+        }
     </style>
 </head>
 <body>
-    <header><h1>{DASHBOARD_TITLE}</h1></header>
+    <header><h1>Showcase Multi Agent Portfolio Analytics</h1></header>
     <main>
         <div class="container">
             <div class="card">
                 <div class="card-title">Portfolio Performance</div>
-                <iframe src="{perf_file}" title="Performance Chart"></iframe>
+                <iframe src="performance.html" title="Performance Chart"></iframe>
             </div>
             <div class="card">
                 <div class="card-title">Top 10 Positions by Market Value (EUR)</div>
-                <iframe src="{top_file}" title="Top Positions"></iframe>
+                <iframe src="top_positions.html" title="Top Positions"></iframe>
             </div>
             <div class="card">
                 <div class="card-title">Average Portfolio Drawdown</div>
-                <iframe src="{dd_file}" title="Drawdown Chart"></iframe>
+                <iframe src="drawdown.html" title="Drawdown Chart"></iframe>
             </div>
             <div class="card">
                 <div class="card-title">Asset Allocation Overview</div>
-                <iframe src="{alloc_file}" title="Allocation Chart"></iframe>
+                <iframe src="allocation.html" title="Allocation Chart"></iframe>
             </div>
         </div>
     </main>
-    <footer><p>{COPYRIGHT_NOTICE}</p></footer>
+    <footer><p>&copy; 2025 Portfolio Dashboard</p></footer>
 </body>
 </html>
-"""
-
-
-def _render_error_page(error_message: str) -> str:
-    return f"""<!DOCTYPE html>
-<html lang="de">
-<head><meta charset="UTF-8"><title>Fehler</title></head>
-<body>
-    <h1>Fehler beim Erstellen des Dashboards</h1>
-    <p>{error_message}</p>
-</body>
-</html>
-"""
