@@ -10,9 +10,9 @@ will generate a CSV file named **historic_portfolio.csv**.
 
 By connecting to the MCP servers **filesystem** and **visualization_dashboard** via LibreChat, you can use the following prompt to create the dashboard and its 4 plots:
 
-**`read the csv file historic_portfolio.csv using filesystem <br>
-from historic_portfolio.csv create a dashboard using the visualization_dashboard mcp server <br>
-save all 4 plots and the dashboard as .html-files under uploads/dashboard using filesystem`**
+**`read the csv file historic_portfolio.csv using filesystem`** <br>
+**`from historic_portfolio.csv create a dashboard using the visualization_dashboard mcp server`** <br>
+**`save all 4 plots and the dashboard as .html-files under uploads/dashboard using filesystem`**
 
 This will generate the dashboard and four plots, which are saved again in the Uploads folder.
 
